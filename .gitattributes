@@ -1,0 +1,6 @@
+# Text Standardization
+*.txt text=auto eol=lf working-tree-encoding=UTF-8
+
+# Image Standardization
+*.png diff=useexif
+*.jpg diff=useexif
