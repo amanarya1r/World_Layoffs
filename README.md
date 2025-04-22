@@ -13,7 +13,6 @@ The project aims to:
 - Clean and standardize real-world data with inconsistencies.
 - Handle missing values intelligently where applicable.
 - Prepare the dataset for reliable data analysis.
-- Track global layoff trends across industries and companies.
 
 ## Dataset Overview
 
@@ -61,43 +60,54 @@ The project aims to:
    - Dropped `row_num` after cleaning.
    - Removed records where both `total_laid_off` and `percentage_laid_off` were missing.
 
+
 ## Cleaning Results (Before & After Snapshots)
 
 ### Duplicates 
-#### 
 - **Before:**
   ![duplicate_before](img/duplicate_before.png)
 - **After:**
-  ![duplicate_after](img)
+  ![duplicate_after](img/duplicate_after.png)
 
 
-### 🧼 Company Name Cleanup
-- **Before:**  
-  ![Before Company Cleanup](image-link)
+### Company Name Cleanup
+| Before | After|
+|-----------|-------|
+|![Before Company Cleanup](img/company_before.png)|![After Company Cleanup](img/company_after.png)|
 
-- **After:**  
-  ![After Company Cleanup](image-link)
+### Industry Column
+| Before | After|
+|-----------|-------|
+|![Before Industry Cleanup](img/industry_before.png)|![After Industry Cleanup](img/industry_after.png)|
 
-### 🧼 Industry Column
-- **Before:**  
-  ![Before Industry Cleanup](image-link)
+### Country Names
+| Before | After|
+|-----------|-------|
+|![Before Country Cleanup](img/countries_before.png)|![After Country Cleanup](img/countries_after.png)|
 
-- **After:**  
-  ![After Industry Cleanup](image-link)
+### Date Formatting
+| Before | After|
+|-----------|-------|
+|![Before Date Formatting](img/date_before.png)|![After Date Formatting](img/date_after.png)|
+|![Before Date Formatting](img/date1_before.png)|![After Country Cleanup](img/date1_after.png)|
 
-### 🧼 Country Names
-- **Before:**  
-  ![Before Country Cleanup](image-link)
+### Populating Industry
+- **Before:**
+  ![Before Populating Industry](img/populating_industry_before.png)
+- **After:**
+  ![After Populating Industry](img/populating_industry_after.png)
 
-- **After:**  
-  ![After Country Cleanup](image-link)
+### Rows Removal having null in both total_laid_off and percentage_laid_off
+- **Before:**
+  ![Before Rows with Null](img/rows_removal_null_before.png)
+- **After:**
+  ![After Rows with Null](img/rows_removal_null_after.png)
 
-### 🧼 Date Formatting
-- **Before:**  
-  ![Before Date Formatting](image-link)
-
-- **After:**  
-  ![After Date Formatting](image-link)
+### Removal row_num
+- **Before:**
+  ![Before row_num Removal](img/row_num_before.png)
+- **After:**
+  ![After row_num Removal](img/row_num_after.png)
 
 ## Key Learnings
 
@@ -115,3 +125,5 @@ The project aims to:
 - Exploratory data analysis (EDA) on layoffs trends.
 - Build dashboards for visualizing layoffs across countries and industries.
 - Attempt web scraping to fill missing `total_laid_off` values from trusted sources.
+
+
