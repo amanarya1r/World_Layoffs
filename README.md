@@ -2,7 +2,7 @@
 
 ## About
 
-This project focuses on cleaning and preparing a global dataset of layoffs reported in 2022. The goal is to ensure the data is ready for time-series analysis, exploratory data analysis (EDA), and insights generation regarding global economic shifts, industry impacts, and employment patterns.
+This MySQL project focuses on cleaning and preparing a global dataset of layoffs reported in 2022. The goal is to ensure the data is ready for time-series analysis, exploratory data analysis (EDA), and insights generation regarding global economic shifts, industry impacts, and employment patterns.
 
 The dataset was obtained from the [Kaggle World Layoffs Dataset](https://www.kaggle.com/datasets/swaptr/layoffs-2022), which includes information on companies, industries, countries, and the extent of layoffs over time.
 
