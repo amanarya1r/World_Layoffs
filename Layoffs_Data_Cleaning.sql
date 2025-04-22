@@ -1,10 +1,13 @@
+-- =============================================== --
 -- Data Cleaning 
-
+-- =============================================== --
+-- ----------------------------------------------- -- 
 SELECT * 
 FROM layoffs;
 -- Before Data Cleaning:
 
 -- Creating a raw dataset
+-- =============================================== --
 CREATE TABLE layoffs_raw
 LIKE layoffs;
 -- LIKE will copy the data inside the layoffs directly inside layoffs_raw
@@ -15,7 +18,8 @@ INSERT layoffs_raw
 SELECT *
 FROM layoffs;
 
--- Remove duplicates
+-- Removing duplicates
+-- =============================================== --
 SELECT *,
 ROW_NUMBER() OVER(
 PARTITION BY company, industry, total_laid_off, percentage_laid_off, `date`) AS row_num
@@ -37,6 +41,7 @@ SELECT *
 FROM layoffs
 WHERE company = 'Casper'; 
 
+-- Creating alternate table(layoffs_staging) for actual data cleaning and layoffs for keeping original data
 CREATE TABLE `layoffs_staging` (
   `company` text,
   `location` text,
@@ -62,21 +67,24 @@ percentage_laid_off, `date`, stage,
 country, funds_raised_millions) AS row_num
 FROM layoffs;
 
+-- to disable safe update
 SET SQL_SAFE_UPDATES = 0;
 
+-- Deleting duplicate rows: using row_num
+-- ----------------------------------------------- -- 
 DELETE FROM layoffs_staging
 WHERE row_num > 1;
 
--- deleting the column because it's redundant column (we are talking row_num)
-
 -- Standardizing data : finding issue with the data and fixing it
+-- ----------------------------------------------- -- 
 SELECT DISTINCT(company) 
 FROM layoffs_staging;
 
 UPDATE layoffs_staging
 SET company = TRIM(company);
 
--- Duplicates in industry
+-- Removing duplicates in industry
+-- ----------------------------------------------- -- 
 SELECT DISTINCT industry
 FROM layoffs_staging
 ORDER BY 1;
@@ -85,7 +93,8 @@ SELECT DISTINCT *
 FROM layoffs_staging
 WHERE industry LIKE 'Product';
 
--- Same companies in two or more industries
+-- Removing same companies in two or more industries
+-- ----------------------------------------------- -- 
 SELECT company
 FROM layoffs_staging
 WHERE industry IN ('Real Estate', 'Construction')
@@ -96,12 +105,14 @@ UPDATE layoffs_staging
 SET industry = 'Crypto' 
 WHERE industry LIKE 'Crypto%';
 
--- Duplicates in location -- No duplicates found
+-- Removing duplicates in location -- No duplicates found
+-- ----------------------------------------------- -- 
 SELECT DISTINCT location 
 FROM layoffs_staging
 ORDER BY 1;
 
--- Duplicates in country 
+-- Removing duplicates in country 
+-- ----------------------------------------------- -- 
 SELECT DISTINCT country 
 FROM layoffs_staging
 ORDER BY 1;
@@ -120,6 +131,7 @@ SET country = TRIM(TRAILING '.' FROM country)
 WHERE country LIKE 'United States%';
 
 -- Changing date from text to date format 
+-- =============================================== --
 SELECT `date`
 FROM layoffs_staging;
 
@@ -137,12 +149,17 @@ SELECT date
 FROM layoffs_staging;
 
 -- Working with the null and blank values 
--- 1. Total layoffs
+-- =============================================== --
+
+-- Removing null values from total_laid_off: nothing found
+-- ----------------------------------------------- -- 
 SELECT * 
 FROM layoffs_staging
 WHERE total_laid_off IS NULL
 AND percentage_laid_off IS NULL;
 
+-- Removing null values from industry
+-- ----------------------------------------------- -- 
 SELECT DISTINCT industry -- it has some missing value
 FROM layoffs_staging;
 
@@ -188,7 +205,9 @@ UPDATE layoffs_staging
 SET industry = 'Gaming'
 WHERE company LIKE "Bally's Interactive";
 
--- Removing of columns and rows having null values in both total_laid_off and perecentage_laid_off
+-- Removing of columns and rows having null values
+-- in both total_laid_off and perecentage_laid_off
+-- =============================================== --
 SELECT * 
 FROM layoffs_staging
 WHERE total_laid_off IS NULL
@@ -200,8 +219,11 @@ WHERE total_laid_off IS NULL
 AND percentage_laid_off IS NULL;
 
 -- Column row_num deletion
+-- =============================================== --
 SELECT * 
 FROM layoffs_staging;
 
 ALTER TABLE layoffs_staging
 DROP COLUMN row_num;
+
+
