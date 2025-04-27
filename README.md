@@ -63,12 +63,14 @@ The project aims to:
 
 ## Cleaning Results (Before & After Snapshots)
 
+<details>
+<summary>Click to Expand</summary>
+
 ### Duplicates 
 - **Before:**
   ![duplicate_before](img/duplicate_before.png)
 - **After:**
   ![duplicate_after](img/duplicate_after.png)
-
 
 ### Company Name Cleanup
 | Before | After|
@@ -109,6 +111,8 @@ The project aims to:
 - **After:**
   ![After row_num Removal](img/row_num_after.png)
 
+</details>
+
 ## Key Learnings
 
 - Learned to use advanced SQL for cleaning, such as window functions and self-joins.
@@ -122,8 +126,7 @@ The project aims to:
 
 ## Future Work
 
-- Exploratory data analysis (EDA) on layoffs trends.
-- Build dashboards for visualizing layoffs across countries and industries.
-- Attempt web scraping to fill missing `total_laid_off` values from trusted sources.
+- Exploratory data analysis (EDA) on layoffs trends [here](https://github.com/amanarya1r/World_Layoffs-EDA).
+
 
 
